@@ -21,4 +21,6 @@ FROM hr.departments d，hr.employees e
 WHERE d.department_id = e.department_id
 GROUP BY department_name
 HAVING d.department_name in ('IT'，'Sales');
-![avatar](E:\oracle\实验一截图\910(8`G}0C@)LXMM)4]O@VN.png);
+![](..\910(8`G}0C@)LXMM)4]O@VN.png)
+![Aaron Swartz](https://raw.githubusercontent.com/smshen/MarkdownPhotos/master/Res/test.jpg)
+
