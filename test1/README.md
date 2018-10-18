@@ -24,3 +24,13 @@ GROUP BY department_name
 HAVING d.department_name in ('IT'，'Sales');
 实验结果截图：![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/3CTNM~6GPIDIOT847IAC5%40B.png)
 
+我的设计的查询：
+SELECT d.department_name，count(e.job_id)as "部门总人数",
+avg(e.salary)as "平均工资"
+FROM hr.departments d right outer join hr.employees e
+on d.department_id = e.department_id
+and d.department_name in ('IT'，'Sales')
+GROUP BY department_name;
+
+
+实验结果截图：![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/910(8%60G%7D0C%40)LXMM)4%5DO%40VN.png)
