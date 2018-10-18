@@ -14,6 +14,7 @@ from hr.departments d，hr.employees e
 where d.department_id = e.department_id
 and d.department_name in ('IT'，'Sales')
 GROUP BY department_name;
+实验结果截图：![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/3CTNM~6GPIDIOT847IAC5%40B.png)
 查询2：
 SELECT d.department_name，count(e.job_id)as "部门总人数"，
 avg(e.salary)as "平均工资"
@@ -21,6 +22,5 @@ FROM hr.departments d，hr.employees e
 WHERE d.department_id = e.department_id
 GROUP BY department_name
 HAVING d.department_name in ('IT'，'Sales');
-![](..\910(8`G}0C@)LXMM)4]O@VN.png)
-![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/3CTNM~6GPIDIOT847IAC5%40B.png)
+实验结果截图：![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/3CTNM~6GPIDIOT847IAC5%40B.png)
 
