@@ -22,5 +22,5 @@ WHERE d.department_id = e.department_id
 GROUP BY department_name
 HAVING d.department_name in ('IT'，'Sales');
 ![](..\910(8`G}0C@)LXMM)4]O@VN.png)
-![Aaron Swartz](https://raw.githubusercontent.com/smshen/MarkdownPhotos/master/Res/test.jpg)
+![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/3CTNM~6GPIDIOT847IAC5%40B.png)
 
