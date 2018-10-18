@@ -33,4 +33,4 @@ and d.department_name in ('IT'，'Sales')
 GROUP BY department_name;
 
 
-实验结果截图：![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/910(8%60G%7D0C%40)LXMM)4%5DO%40VN.png)
+实验结果截图：![Aaron Swartz](https://github.com/rusellwestbook/oracle/blob/master/test1/910(8%60G%7D0C%40)LXMM)4%5DO%40VN.png）
