@@ -21,4 +21,4 @@ FROM hr.departments d，hr.employees e
 WHERE d.department_id = e.department_id
 GROUP BY department_name
 HAVING d.department_name in ('IT'，'Sales');
-![D:\img\sss.png]()
+![D:\img\2f61aa2f404a4587952e24667342331c.jpeg]()
