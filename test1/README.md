@@ -25,7 +25,8 @@ GROUP BY department_name
 HAVING d.department_name in ('IT'，'Sales');
 ### 实验结果截图：![](https://github.com/rusellwestbook/oracle/blob/master/test1/3CTNM~6GPIDIOT847IAC5%40B.png)
 ### 优化指导截图：![](https://github.com/rusellwestbook/oracle/blob/master/test1/R%7BLFDCWCF2HM1TEPF%60O0NXL.png)
-### 我的设计的查询：
+#### 以上两个查询第二个查询是最优的，第二个语句通过group by 和having的联合使用使查询语句的逻辑更加紧密。HAVING语句通常与GROUP BY语句联合使用，用来过滤由GROUP BY语句返回的记录集。HAVING语句的存在弥补了WHERE关键字不能与聚合函数联合使用的不足。
+#### 我的设计的查询：我的查询语句用到了右外连接，右外连接与左外连接类似，只是右端表中的所有元组都列出，限制左端表的数据必须满足连接条件，而不管右端表中的数据是否满足连接条件，均输出表中的内容。
 SELECT d.department_name，count(e.job_id)as "部门总人数",
 avg(e.salary)as "平均工资"
 FROM hr.departments d right outer join hr.employees e
