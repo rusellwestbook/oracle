@@ -21,8 +21,10 @@ User altered.
 SQL> GRANT con_res_view TO new_user;
 Grant succeeded.
 SQL> exit
+
 ### 实验结果截图：
 ![](https://github.com/rusellwestbook/oracle/blob/master/test2/a.png)
+
 2，$ sqlplus new_user/123@pdborcl
 SQL> show user;
 USER is "NEW_USER"
@@ -42,8 +44,10 @@ wang
 SQL> GRANT SELECT ON myview TO hr;
 Grant succeeded.
 SQL>exit
+
 ### 实验结果截图：
 ![](https://github.com/rusellwestbook/oracle/blob/master/test2/b.png)
+
 3，$ sqlplus hr/123@pdborcl
 SQL> SELECT * FROM new_user.myview;
 NAME
@@ -51,13 +55,12 @@ NAME
 zhang
 wang
 SQL> exit
+
 ### 实验结果截图：
 ![](https://github.com/rusellwestbook/oracle/blob/master/test2/c.png)
-测试一下同学用户之间的表的共享，只读共享和读写共享都测试一下。
 
 数据库和表空间占用分析
 当全班同学的实验都做完之后，数据库pdborcl中包含了每个同学的角色和用户。 所有同学的用户都使用表空间users存储表的数据。 表空间中存储了很多相同名称的表mytable和视图myview，但分别属性于不同的用户，不会引起混淆。 随着用户往表中插入数据，表空间的磁盘使用量会增加。
-
 查看数据库的使用情况
 以下样例查看表空间的数据库文件，以及每个文件的磁盘占用情况。
 
