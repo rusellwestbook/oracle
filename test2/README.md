@@ -24,7 +24,7 @@ SQL> exit
 
 ### 实验结果截图：
 ![](https://github.com/rusellwestbook/oracle/blob/master/test2/a.png)
-
+# 
 2，$ sqlplus new_user/123@pdborcl
 SQL> show user;
 USER is "NEW_USER"
@@ -38,7 +38,6 @@ SQL> CREATE VIEW myview AS SELECT name FROM mytable;
 View created.
 SQL> SELECT * FROM myview;
 NAME
---------------------------------------------------
 zhang
 wang
 SQL> GRANT SELECT ON myview TO hr;
@@ -51,7 +50,6 @@ SQL>exit
 3，$ sqlplus hr/123@pdborcl
 SQL> SELECT * FROM new_user.myview;
 NAME
---------------------------------------------------
 zhang
 wang
 SQL> exit
@@ -65,9 +63,7 @@ SQL> exit
 以下样例查看表空间的数据库文件，以及每个文件的磁盘占用情况。
 
 $ sqlplus system/123@pdborcl
-
 SQL>SELECT tablespace_name,FILE_NAME,BYTES/1024/1024 MB,MAXBYTES/1024/1024 MAX_MB,autoextensible FROM dba_data_files  WHERE  tablespace_name='USERS';
-
 SQL>SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
  free/1024/1024 "剩余MB",( total - free )/1024/1024 "使用MB",
  Round(( total - free )/ total,4)* 100 "使用率%"
