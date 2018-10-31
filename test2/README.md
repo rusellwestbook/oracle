@@ -21,4 +21,12 @@ User altered.
 SQL> GRANT con_res_view TO new_user;
 Grant succeeded.
 SQL> exit
-### 实验结果截图：![](https://github.com/rusellwestbook/oracle/blob/master/test2/a.png)
+### 实验结果截图：
+![](https://github.com/rusellwestbook/oracle/blob/master/test2/a.png)
+### 实验结果截图：
+![](https://github.com/rusellwestbook/oracle/blob/master/test2/b.png)
+
+### 实验结果截图：
+![](https://github.com/rusellwestbook/oracle/blob/master/test2/c.png)
+### 实验结果截图：
+![](https://github.com/rusellwestbook/oracle/blob/master/test2/d.png)
