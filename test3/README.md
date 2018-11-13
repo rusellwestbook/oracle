@@ -125,3 +125,5 @@ insert into order_details(ID,ORDER_ID,PRODUCT_ID,PRODUCT_NUM,PRODUCT_PRICE) VALU
 end loop;
 commit;
 end;
+#### 7，联合查询语句。
+SELECT * FROM orders,order_details  Where orders.order_id = order_details.order_id AND customer_tel like '%151%'
