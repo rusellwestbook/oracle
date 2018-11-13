@@ -8,8 +8,15 @@
 表创建成功后，插入数据，数据能并平均分布到各个分区。每个表的数据都应该大于1万行，对表进行联合查询。
 写出插入数据的语句和查询数据的语句，并分析语句的执行计划。
 进行分区与不分区的对比实验。
+### 实验步骤
+#### 1，登录自己的账号 rx
+[oracle@deep02 ~]$ sqlplus rx/123@pdborcl
 
-## 创建orders表
+SQL*Plus: Release 12.1.0.2.0 Production on 星期三 11月 7 09:38:22 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+#### 2，创建orders表
 SQL> CREATE TABLE orders 
 (
  order_id NUMBER(10, 0) NOT NULL 
@@ -50,7 +57,7 @@ TABLESPACE USERS02
 ...
 );
 
-## 创建orders_details表
+#### 创建orders_details表
 SQL> CREATE TABLE order_details 
 (
 id NUMBER(10, 0) NOT NULL 
@@ -81,3 +88,40 @@ TABLESPACE USERS02
 ) 
 NOCOMPRESS NO INMEMORY  
 );
+
+#### 3，用system用户授权自己的账号访问USERS02,USERS03表空间。
+SQL*Plus: Release 12.1.0.2.0 Production on 星期三 11月 7 09:40:22 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+上次成功登录时间: 星期三 11月 07 2018 08:44:05 +08:00
+连接到:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+SQL> ALTER USER llwaves QUOTA 50M ON users02;
+用户已更改。
+SQL> ALTER USER llwaves QUOTA 50M ON users03;
+用户已更改。
+SQL> exit
+#### 4，给用户分配可查询的权限的语句。
+grant SELECT on "LLWAVES"."ORDERS" to "LLWAVES" ;
+grant SELECT on "LLWAVES"."ORDER_DETAILS" to "LLWAVES" ;
+
+#### 5，向表中插入一万条数据
+向orders表中插入一万条数据。
+begin
+for i in 1..10000
+loop
+ insert into ORDERS(ORDER_ID,CUSTOMER_NAME,CUSTOMER_TEL,ORDER_DATE,EMPLOYEE_ID,DISCOUNT) VALUES(i ,'llwaves','151xxxxxxxx',to_date('2017-02-14','yyyy-mm-dd'),1,2);
+end loop;
+commit;
+end;
+
+#### ,6，向orders_details表中插入一万条数据。
+begin
+for i in 1..10000
+loop
+insert into order_details(ID,ORDER_ID,PRODUCT_ID,PRODUCT_NUM,PRODUCT_PRICE) VALUES(i,i,'01-01',i,1000);
+end loop;
+commit;
+end;
