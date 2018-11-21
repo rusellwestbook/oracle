@@ -1,12 +1,7 @@
-# 实验四 对象管理
-/*
-实验四脚本文件:
-运行该脚本的前题条件：
-1.必须在自己的用户下运行,不能在system,sys用户运行
-2.用户必须可以访问表空间USERS和USERS02
-3.用户必须有创建视图权限：Create View
-
+# 实验四 对象管理 
+#### orcle用户：rx
 下面是手工增加的一个表空间USERS02。
+<pre>
 Create Tablespace Users02
 datafile
 '/home/oracle/app/oracle/oradata/orcl/pdborcl/pdbtest_users02_1.dbf'
@@ -14,8 +9,10 @@ datafile
 '/home/oracle/app/oracle/oradata/orcl/pdborcl/pdbtest_users02_2.dbf'
   SIZE 100M AUTOEXTEND ON NEXT 256M MAXSIZE UNLIMITED
 EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+</pre>
 
 下面是创建用户study
+<pre>
 CREATE USER STUDY IDENTIFIED BY 123
 DEFAULT TABLESPACE "USERS"
 TEMPORARY TABLESPACE "TEMP";
@@ -32,13 +29,7 @@ ALTER USER STUDY DEFAULT ROLE "CONNECT","RESOURCE";
 
 -- SYSTEM PRIVILEGES
 GRANT CREATE VIEW TO STUDY WITH ADMIN OPTION;
-
-
-参考：
-1. oracle分区技术-- interval parition实验及总结
-   http://blog.chinaunix.net/uid-23284114-id-3304525.html
-*/
-
+</pre>
 
 --删除表和序列
 --删除表的同时会一起删除主外键、触发器、程序包。
@@ -98,6 +89,7 @@ end;
 --------------------------------------------------------
 --  DDL for Table DEPARTMENTS
 --------------------------------------------------------
+<pre>
 CREATE TABLE DEPARTMENTS
 (
   DEPARTMENT_ID NUMBER(6, 0) NOT NULL
@@ -138,7 +130,7 @@ STORAGE
   BUFFER_POOL DEFAULT
 )
 NOCOMPRESS NO INMEMORY NOPARALLEL;
-
+</pre>
 
 
 
