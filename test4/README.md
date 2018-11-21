@@ -31,8 +31,8 @@ ALTER USER STUDY DEFAULT ROLE "CONNECT","RESOURCE";
 GRANT CREATE VIEW TO STUDY WITH ADMIN OPTION;
 </pre>
 
---删除表和序列
---删除表的同时会一起删除主外键、触发器、程序包。
+删除表和序列,删除表的同时会一起删除主外键、触发器、程序包。
+<pre>
 declare
       num   number;
 begin
@@ -85,10 +85,8 @@ begin
           execute immediate 'DROP PACKAGE MYPACK';
       end   if;
 end;
-/
---------------------------------------------------------
---  DDL for Table DEPARTMENTS
---------------------------------------------------------
+</pre>
+ 创建员工表
 <pre>
 CREATE TABLE DEPARTMENTS
 (
@@ -131,78 +129,8 @@ STORAGE
 )
 NOCOMPRESS NO INMEMORY NOPARALLEL;
 </pre>
-
-
-
---------------------------------------------------------
---  DDL for Table EMPLOYEES
---------------------------------------------------------
-CREATE TABLE EMPLOYEES
-(
-  EMPLOYEE_ID NUMBER(6, 0) NOT NULL
-, NAME VARCHAR2(40 BYTE) NOT NULL
-, EMAIL VARCHAR2(40 BYTE)
-, PHONE_NUMBER VARCHAR2(40 BYTE)
-, HIRE_DATE DATE NOT NULL
-, SALARY NUMBER(8, 2)
-, MANAGER_ID NUMBER(6, 0)
-, DEPARTMENT_ID NUMBER(6, 0)
-, PHOTO BLOB
-, CONSTRAINT EMPLOYEES_PK PRIMARY KEY
-  (
-    EMPLOYEE_ID
-  )
-  USING INDEX
-  (
-      CREATE UNIQUE INDEX EMPLOYEES_PK ON EMPLOYEES (EMPLOYEE_ID ASC)
-      NOLOGGING
-      TABLESPACE USERS
-      PCTFREE 10
-      INITRANS 2
-      STORAGE
-      (
-        INITIAL 65536
-        NEXT 1048576
-        MINEXTENTS 1
-        MAXEXTENTS UNLIMITED
-        BUFFER_POOL DEFAULT
-      )
-      NOPARALLEL
-  )
-  ENABLE
-)
-NOLOGGING
-TABLESPACE USERS
-PCTFREE 10
-INITRANS 1
-STORAGE
-(
-  INITIAL 65536
-  NEXT 1048576
-  MINEXTENTS 1
-  MAXEXTENTS UNLIMITED
-  BUFFER_POOL DEFAULT
-)
-NOCOMPRESS
-NO INMEMORY
-NOPARALLEL
-LOB (PHOTO) STORE AS SYS_LOB0000092017C00009$$
-(
-  ENABLE STORAGE IN ROW
-  CHUNK 8192
-  NOCACHE
-  NOLOGGING
-  TABLESPACE USERS
-  STORAGE
-  (
-    INITIAL 106496
-    NEXT 1048576
-    MINEXTENTS 1
-    MAXEXTENTS UNLIMITED
-    BUFFER_POOL DEFAULT
-  )
-);
-
+创建员工index name表
+<pre>
 CREATE INDEX EMPLOYEES_INDEX1_NAME ON EMPLOYEES (NAME ASC)
 NOLOGGING
 TABLESPACE USERS
@@ -259,9 +187,10 @@ ALTER TABLE EMPLOYEES
 ADD CONSTRAINT EMPLOYEES_SALARY CHECK
 (SALARY>0)
 ENABLE;
+</pre>
 
-
-
+创建产品表
+<pre>
 CREATE TABLE PRODUCTS
 (
   PRODUCT_NAME VARCHAR2(40 BYTE) NOT NULL
@@ -289,22 +218,24 @@ ALTER TABLE PRODUCTS
 ADD CONSTRAINT PRODUCTS_CHK1 CHECK
 (PRODUCT_TYPE IN ('耗材', '手机', '电脑'))
 ENABLE;
+</pre>
 
 
-
---------------------------------------------------------
---  DDL for Table ORDER_ID_TEMP
+DDL for Table ORDER_ID_TEMP
+<pre>
 CREATE GLOBAL TEMPORARY TABLE "ORDER_ID_TEMP"
    (	"ORDER_ID" NUMBER(10,0) NOT NULL ENABLE,
 	 CONSTRAINT "ORDER_ID_TEMP_PK" PRIMARY KEY ("ORDER_ID") ENABLE
    ) ON COMMIT DELETE ROWS ;
 
    COMMENT ON TABLE "ORDER_ID_TEMP"  IS '用于触发器存储临时ORDER_ID';
-
+</pre>
 
 --------------------------------------------------------
 --  DDL for Table ORDERS
 --------------------------------------------------------
+创建orders表
+<pre>
 CREATE TABLE ORDERS
 (
   ORDER_ID NUMBER(10, 0) NOT NULL
@@ -355,8 +286,9 @@ PARTITION BY RANGE (ORDER_DATE)
   )
   NOCOMPRESS NO INMEMORY
 );
-
---创建本地分区索引ORDERS_INDEX_DATE：
+</pre>
+创建本地分区索引ORDERS_INDEX_DATE：
+<pre>
 CREATE INDEX ORDERS_INDEX_DATE ON ORDERS (ORDER_DATE ASC)
 LOCAL
 (
@@ -545,12 +477,10 @@ ALTER TABLE ORDER_DETAILS
 ADD CONSTRAINT ORDER_DETAILS_PRODUCT_NUM CHECK
 (Product_Num>0)
 ENABLE;
+</pre>
 
-
---创建3个触发器
---------------------------------------------------------
---  DDL for Trigger ORDERS_TRIG_ROW_LEVEL
---------------------------------------------------------
+创建3个触发器
+<pre>
 CREATE OR REPLACE EDITIONABLE TRIGGER "ORDERS_TRIG_ROW_LEVEL"
 BEFORE INSERT OR UPDATE OF DISCOUNT ON "ORDERS"
 FOR EACH ROW --行级触发器
@@ -571,11 +501,10 @@ END;
 --批量插入订单数据之前，禁用触发器
 ALTER TRIGGER "ORDERS_TRIG_ROW_LEVEL" DISABLE;
 
+</pre>
 
---------------------------------------------------------
 --  DDL for Trigger ORDER_DETAILS_ROW_TRIG
---------------------------------------------------------
-
+<pre>
 CREATE OR REPLACE EDITIONABLE TRIGGER "ORDER_DETAILS_ROW_TRIG"
 AFTER DELETE OR INSERT OR UPDATE  ON ORDER_DETAILS
 FOR EACH ROW
@@ -596,6 +525,7 @@ BEGIN
       INSERT (ORDER_ID) VALUES(:OLD.ORDER_ID);
   END IF;
 END;
+</pre>
 /
 ALTER TRIGGER "ORDER_DETAILS_ROW_TRIG" DISABLE;
 --------------------------------------------------------
