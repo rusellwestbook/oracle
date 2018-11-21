@@ -526,7 +526,7 @@ BEGIN
   END IF;
 END;
 </pre>
-/
+<pre>
 ALTER TRIGGER "ORDER_DETAILS_ROW_TRIG" DISABLE;
 --------------------------------------------------------
 --  DDL for Trigger ORDER_DETAILS_SNTNS_TRIG
@@ -760,3 +760,4 @@ WHERE a.tablespace_name = b.tablespace_name
 -rw-r----- 1 oracle root 1.5G 11月  1 14:53 /home/oracle/app/oracle/oradata/orcl/pdbtest/pdbtest_users02_1.dbf
 -rw-r----- 1 oracle root 2.5G 11月  1 14:53 /home/oracle/app/oracle/oradata/orcl/pdbtest/pdbtest_users02_2.dbf
 */
+</pre>
