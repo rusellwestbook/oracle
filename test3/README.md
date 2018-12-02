@@ -10,7 +10,7 @@
 进行分区与不分区的对比实验。
 ### 实验步骤
 #### 1，登录自己的账号 rx
-[oracle@deep02 ~]$ sqlplus rx/123@pdborcl
+<pre>[oracle@deep02 ~]$ sqlplus rx/123@pdborcl
 
 SQL*Plus: Release 12.1.0.2.0 Production on 星期三 11月 7 09:38:22 2018
 
@@ -127,3 +127,4 @@ commit;
 end;
 #### 7，联合查询语句。
 SELECT * FROM orders,order_details  Where orders.order_id = order_details.order_id AND customer_tel like '%151%'
+</pre>
