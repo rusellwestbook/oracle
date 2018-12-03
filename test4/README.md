@@ -1,5 +1,5 @@
 # 实验四 对象管理 
-#### orcle用户：rx
+#### orcle用户：new_userrx
 下面是手工增加的一个表空间USERS02。
 <pre>
 Create Tablespace Users02
