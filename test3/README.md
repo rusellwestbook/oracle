@@ -9,8 +9,8 @@
 写出插入数据的语句和查询数据的语句，并分析语句的执行计划。
 进行分区与不分区的对比实验。
 ### 实验步骤
-#### 1，登录自己的账号 rx
-<pre>[oracle@deep02 ~]$ sqlplus rx/123@pdborcl
+#### 1，登录自己的账号 new_userrx
+<pre>[oracle@deep02 ~]$ sqlplus new_userrx/123@pdborcl
 
 SQL*Plus: Release 12.1.0.2.0 Production on 星期三 11月 7 09:38:22 2018
 
@@ -98,14 +98,14 @@ Copyright (c) 1982, 2014, Oracle.  All rights reserved.
 连接到:
 Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
 With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
-SQL> ALTER USER rx QUOTA 50M ON users02;
+SQL> ALTER USER new_userrx QUOTA 50M ON users02;
 用户已更改。
-SQL> ALTER USER rx QUOTA 50M ON users03;
+SQL> ALTER USER new_userrx QUOTA 50M ON users03;
 用户已更改。
 SQL> exit
 #### 4，给用户分配可查询的权限的语句。
-grant SELECT on "rx"."ORDERS" to "rx" ;
-grant SELECT on "rx"."ORDER_DETAILS" to "rx" ;
+grant SELECT on "new_userrx"."ORDERS" to "new_userrx" ;
+grant SELECT on "new_userrx"."ORDER_DETAILS" to "new_userrx" ;
 
 #### 5，向表中插入一万条数据
 向orders表中插入一万条数据。
